@@ -9,8 +9,8 @@
 
 ### Wednesday 30th September
 
-* *0.5 hour* Background reading on model checking
-* *0.5 hour* Meeting with project supervisor
+* *0.5 hours* Background reading on model checking
+* *0.5 hours* Meeting with project supervisor
 * *1 hour* Reading about xG
 
 ## Week 2
@@ -27,28 +27,41 @@
 
 ### Monday 12th October
 
-* *0.5 hour* Discussion with William Kavanagh
+* *0.5 hours* Discussion with William Kavanagh
 * *1 hour* Researching appropriate data set
 * *1 hour* Researching materials to build traditional models
 
 ### Tuesday 13th October
 
-* *0.5 hour* Meeting with project supervisor
+* *0.5 hours* Meeting with project supervisor
 
 ## Week 4
 
 ### Tuesday 20th October
 
-* *0.5 hour* Meeting with project supervisor
+* *0.5 hours* Meeting with project supervisor
 
 ## Week 5
 
 ### Tuesday 27th October
 
-* *0.5 hour* Meeting with project supervisor
+* *0.5 hours* Meeting with project supervisor
 
 ## Week 6
 
+### Friday 6th November
+
+* *1 hour* Background reading (William Kavanagh's dissertation, CGJ article)
+
 ## Week 7
 
+### Thursday 12th November
+* *1.5 hours* Background reading (Uppsala papers)
+
+### Sunday 15th November
+
+* *2 hours* General project organisation - repository, timelog, issue board
+
 ## Week 8
+
+### Monday 16th November
