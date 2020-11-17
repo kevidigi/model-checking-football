@@ -65,3 +65,5 @@
 ## Week 8
 
 ### Monday 16th November
+
+* *4 hours* created a project roadmap, added further issues, updated dissertation .tex
