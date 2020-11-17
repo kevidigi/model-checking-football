@@ -67,3 +67,7 @@
 ### Monday 16th November
 
 * *4 hours* created a project roadmap, added further issues, updated dissertation .tex
+
+### Tuesday 17th November
+
+* *0.5 hours* meeting with project supervisor
