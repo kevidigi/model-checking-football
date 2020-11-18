@@ -71,3 +71,4 @@
 ### Tuesday 17th November
 
 * *0.5 hours* meeting with project supervisor
+* *3 houra* Studying traditional football data analysis (FC Python)
