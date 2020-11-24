@@ -72,3 +72,18 @@
 
 * *0.5 hours* meeting with project supervisor
 * *3 houra* Studying traditional football data analysis (FC Python)
+
+### Wednesday 18th November
+
+* *4 hours* studying Uppsala Mathematics in Football course - data visualisation
+
+### Sunday 22nd November
+
+* *2 hours* studying Uppsala Mathematics in Football course - data visualistion
+* *1 hour* created simple visualisation of some football events (Quaresma's crosses and shots, 2018 WC)
+
+## Week 9
+
+### Monday 23rd November
+
+* *3.5 hours* studying Probabilistic Model Checking - DTMCs, probability transition matrices
