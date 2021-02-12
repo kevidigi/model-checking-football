@@ -40,6 +40,8 @@ zoneXYs = [
     ]    
 
 # transition matrix - transmat[state][state']
+# [..][..][7] is possession lost
+# [..][..][8] is a goal
 transmat = [
     [0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0],
@@ -92,10 +94,16 @@ for i, shot in shots.iterrows():
             goals += 1
             for j in range(0,7):
                 if fromZoneX(j) and fromZoneY(j):
+                    transmat[j][8] += 1
                     
                     
 
 print("goals from open play: " + str(goals))   
+
+
+for j in range(0, 7):
+    print(transmat[j])
+
 
 # for j in range(0, 7):
 
