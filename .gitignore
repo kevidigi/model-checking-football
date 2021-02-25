@@ -4,3 +4,6 @@
 # python bits
 *.pyc
 *.pyo
+
+# MacOS patter
+.DS_Store
