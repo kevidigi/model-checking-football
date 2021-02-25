@@ -1,0 +1,6 @@
+# datasets - primarily because they are too big for GitHub
+/data/*
+
+# python bits
+*.pyc
+*.pyo
