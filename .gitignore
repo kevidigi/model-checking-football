@@ -1,5 +1,6 @@
 # datasets - primarily because they are too big for GitHub
 /data/*
+*.txt
 
 # python bits
 *.pyc
