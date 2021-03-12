@@ -6,5 +6,8 @@
 *.pyc
 *.pyo
 
+# LaTeX bits
+*.pdf
+
 # MacOS patter
 .DS_Store

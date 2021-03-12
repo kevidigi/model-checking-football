@@ -2,18 +2,14 @@
 # -*- coding: utf-8 -*-
 
 # Script for extraction of transition probabilities (state to state) 
-# from Wyscout football data (json).
+# from Wyscout football data (json). Transitions only occur via passes
+# and shots for the purposes of my model.
 
 # @author: Kevin Lynch <kevin.lynch@glasgow.ac.uk>
 
 import pandas as pd
-import numpy as np
 import json
 import time
-import matplotlib.pyplot as plt
-
-
-from draw_pitch import draw_pitch
 
 zoneXYs = [
         [(50, 0),   (67, 100)],
