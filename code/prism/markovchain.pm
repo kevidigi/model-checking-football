@@ -2,7 +2,7 @@ dtmc
 
 module possession
 
-	// state: i.e. area of the pitch where ball isin possession
+	// state: i.e. area of the pitch where ball is in possession
 	s : [0..8];
 		// 0 - 6: areas of the pitch
 		// 7    : posession lost

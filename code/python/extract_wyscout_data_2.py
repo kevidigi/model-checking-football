@@ -77,11 +77,13 @@ def calculate_transition_matrix(filename):
                 for j in range(0,7):
                     if fromZoneX(j, shot) and fromZoneY(j, shot):
                         trans_mat[j][8] += 1
+                        decision_mat[j][7] += 1
             # and 'possession lost' from a shot
             else:
                 for j in range(0,7):
                     if fromZoneX(j, shot) and fromZoneY(j, shot):
                         trans_mat[j][7] += 1
+                        decision_mat[j][7] += 1
     
     # populate transition matrix for 'possession lost' from passes
     for i, aPass in passes.iterrows():
@@ -90,6 +92,9 @@ def calculate_transition_matrix(filename):
                 for j in range(0,7):
                     if fromZoneX(j, aPass) and fromZoneY(j, aPass):
                         trans_mat[j][7] += 1
+                        for k in range (0,7):
+                            if toZoneX(k, aPass) and toZoneY(k, aPass):
+                                    decision_mat[j][k] += 1
             # and terminal zones for each successful pass
             elif tag['id'] == 1801:
                 for j in range(0,7):
@@ -97,7 +102,7 @@ def calculate_transition_matrix(filename):
                         for k in range (0,7):
                             if toZoneX(k, aPass) and toZoneY(k, aPass):
                                 trans_mat[j][k] += 1
-                                succ_mat[j][k] += 1
+                                decision_mat[j][k] += 1
 
 # calculate probability of s -> s' 
 def convert_to_probabilities():
@@ -122,17 +127,30 @@ trans_mat = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1]
+]
+
+# pass from [i] to [j] or shoot ( [i][7] ) 
+decision_mat = [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
 succ_mat = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
 # I need a matrix of... for each state, for each decision in that state
@@ -153,11 +171,16 @@ calculate_transition_matrix("../../data/events_Spain.json")
 calculate_transition_matrix("../../data/events_Germany.json")
 calculate_transition_matrix("../../data/events_England.json")
 
+for r in range (0,7):
+    for c in range (0,7):
+        succ_mat[r][c] = (trans_mat[r][c] / decision_mat[r][c])
+        
+    succ_mat[r][7] = trans_mat[r][8] / decision_mat[r][7]
+
 convert_to_probabilities()
 
 # fix for floating point error - all Ps must add to 1
 trans_mat[3][0] += 0.0000000000000001
-succ_mat /= trans_mat
 
 # double check!
 check_sum_P()
@@ -165,8 +188,14 @@ check_sum_P()
 print()
 print(pd.DataFrame(trans_mat))
 print()
+print(pd.DataFrame(decision_mat))
+
+print()
 print(pd.DataFrame(succ_mat))
+print()
+
 pd.DataFrame(trans_mat).to_csv("./probabilities.txt")   
+pd.DataFrame(succ_mat).to_csv("./decision_success.txt")
 
 end = time.time()
 print("time elapsed: " + str(round(((end - start) / 60), 2)) 
@@ -174,7 +203,7 @@ print("time elapsed: " + str(round(((end - start) / 60), 2))
 
 prismFile = open("../prism/markovchain.pm", "w");
 prismFile.write("dtmc\n\nmodule possession\n\n\t" +
-                "// state: i.e. area of the pitch where ball is" + 
+                "// state: i.e. area of the pitch where ball is " + 
                 "in possession\n" + 
                 "\ts : [0..8];\n" +
                 "\t\t// 0 - 6: areas of the pitch\n" +
