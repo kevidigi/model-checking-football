@@ -236,7 +236,7 @@ prismFile.write("mdp\n\n" +
                 str(succ_mat[1][2]) + ") : (s'=7);\n\t" +
                 "[pass_1_3]\t      s=1 ->\n\t" +
                 str(succ_mat[1][3]) + " : (s'=3) + (1 - " + 
-                tr(succ_mat[1][3]) + ") : (s'=7);\n\t" +
+                str(succ_mat[1][3]) + ") : (s'=7);\n\t" +
                 "[pass_1_4]\t      s=1 ->\n\t" +
                 str(succ_mat[1][4]) + " : (s'=4) + (1 - " + 
                 str(succ_mat[1][4]) + ") : (s'=7);\n\t" +

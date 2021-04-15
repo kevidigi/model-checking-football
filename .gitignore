@@ -1,5 +1,7 @@
 # datasets - primarily because they are too big for GitHub
 /data/*
+
+# plain text files for notes
 *.txt
 
 # python bits
@@ -8,6 +10,11 @@
 
 # LaTeX bits
 *.pdf
+
+# PRISM files - generated from Python
+*.pm
+*.sta
+*.tra
 
 # MacOS patter
 .DS_Store

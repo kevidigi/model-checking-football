@@ -202,25 +202,6 @@ def calculate_xG(sh):
        bsum = bsum + b[i + 1] * sh[v]
    xG = 1 / (1 + np.exp(bsum)) 
    return xG   
-
-# add an xG column to the original shots_model dataframe
-# xG = shots_model.apply(calculate_xG, axis = 1) 
-# shots_model = shots_model.assign(xG = xG)
-
-# xgplot = np.histogram2d(shots_model['X'], shots_model['Y'], bins = [5, 5],
-#                           weights = shots_model['xG'], normed = False, range = [[0,100], [0,100]])
-
-# # plot the shotplot
-# (fig, ax) = FCPython.createGoalMouth()
-# pos = ax.imshow(xgplot[0], extent = [-1, 66, 104, -1], aspect = 'auto',
-#                 cmap = plt.cm.Blues)
-# fig.colorbar(pos, ax = ax)
-# ax.set_title('Probability of Goal')
-# plt.xlim((-1, 66))
-# plt.ylim((-3, 35))
-# plt.tight_layout()
-# plt.gca().set_aspect('equal', adjustable = 'box')
-# plt.show()
         
 #Add an xG to my dataframe
 xG=shots_model.apply(calculate_xG, axis=1) 
