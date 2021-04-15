@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Mar 25 17:32:00 2020
 
-@author: davsu428
-"""
+# Script for generating Football visualisations
+# Written by David Sumpter / Friends of Tracking (2020)
+# Based on visualisation code at fcpython.com
+
 import matplotlib.pyplot as plt
 from matplotlib.patches import Arc
 

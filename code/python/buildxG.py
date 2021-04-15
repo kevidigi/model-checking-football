@@ -14,7 +14,7 @@ import json
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
-import FCPython
+import fcPython
 
 def import_wyscout_data(filepath, df):
     with open(filepath) as f:
@@ -83,7 +83,7 @@ goalplot = np.histogram2d(goals_only['X'], goals_only['Y'], bins = 50,
 
 
 # plot the shotplot
-(fig, ax) = FCPython.createGoalMouth()
+(fig, ax) = fcPython.createGoalMouth()
 pos = ax.imshow(shotplot[0], extent = [-1, 66, 104, -1], aspect = 'auto',
                 cmap = plt.cm.Blues)
 fig.colorbar(pos, ax = ax)
@@ -95,7 +95,7 @@ plt.gca().set_aspect('equal', adjustable = 'box')
 plt.show()
 
 # plot the goal plot
-(fig, ax) = FCPython.createGoalMouth()
+(fig, ax) = fcPython.createGoalMouth()
 pos = ax.imshow(goalplot[0], extent = [-1, 66, 104, -1], aspect = 'auto',
                 cmap = plt.cm.Greens)
 fig.colorbar(pos, ax = ax)
@@ -107,7 +107,7 @@ plt.gca().set_aspect('equal', adjustable = 'box')
 plt.show()
 
 # plot an xG histogram: goals / shots
-(fig, ax) = FCPython.createGoalMouth()
+(fig, ax) = fcPython.createGoalMouth()
 pos = ax.imshow(goalplot[0] / shotplot[0], extent = [-1, 66, 104, -1],
                 aspect = 'auto', cmap = plt.cm.Reds, vmin = 0, vmax = 0.5)
 fig.colorbar(pos, ax = ax)
@@ -239,7 +239,7 @@ for x in range(65):
         
         pgoal_2d[x,y] =  calculate_xG(sh)
 
-(fig,ax) = FCPython.createGoalMouth()
+(fig,ax) = fcPython.createGoalMouth()
 pos=ax.imshow(pgoal_2d, extent=[-1,65,65,-1], aspect='auto',cmap=plt.cm.Reds,vmin=0, vmax=0.3)
 fig.colorbar(pos, ax=ax)
 ax.set_title('Probability of goal')

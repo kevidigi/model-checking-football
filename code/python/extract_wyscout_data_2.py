@@ -153,16 +153,6 @@ succ_mat = [
     [0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-# I need a matrix of... for each state, for each decision in that state
-# (pass to zone 0-6 or shoot) and chance of succ/fail
-# e.g. zone 0 -> pass to zone 3 -> succ? / poslos?
-# e.g. zone 4 -> shoot -> succ? / poslos? (can use xG here)
-# can synthesise own xG model for dissertation patter
-
-# for failed passes: get angle (to x axis?) of pass
-# see which n zones would be on straight path
-# 1/n failure added to each zone
-
 start = time.time()
 
 calculate_transition_matrix("../../data/events_Italy.json")
@@ -191,6 +181,7 @@ print()
 print(pd.DataFrame(decision_mat))
 
 print()
+print("Probabilities of successful transition (not losing possession):")
 print(pd.DataFrame(succ_mat))
 print()
 
@@ -201,78 +192,201 @@ end = time.time()
 print("time elapsed: " + str(round(((end - start) / 60), 2)) 
       + " mins (approx)")
 
-prismFile = open("../prism/markovchain.pm", "w");
-prismFile.write("dtmc\n\nmodule possession\n\n\t" +
-                "// state: i.e. area of the pitch where ball is " + 
-                "in possession\n" + 
-                "\ts : [0..8];\n" +
-                "\t\t// 0 - 6: areas of the pitch\n" +
-                "\t\t// 7    : posession lost\n" +
-                "\t\t// 8    : goal scored\n\n" +
-                "\t[] s=0 -> " + str(trans_mat[0][0]) + " : (s'=0) + " + 
-                str(trans_mat[0][1]) + "  : (s'=1) + " + 
-                str(trans_mat[0][2]) + "  : (s'=2) + " + 
-                str(trans_mat[0][3]) + "  : (s'=3) + " + 
-                str(trans_mat[0][4]) + "  : (s'=4) + " + 
-                str(trans_mat[0][5]) + "  : (s'=5) + " + 
-                str(trans_mat[0][6]) + "  : (s'=6) + " + 
-                str(trans_mat[0][7]) + "  : (s'=7) + " + 
-                str(trans_mat[0][8]) + "  : (s'=8);\n\t" +
-                "[] s=1 -> " + str(trans_mat[1][0]) + " : (s'=0) + " + 
-                str(trans_mat[1][1]) + "  : (s'=1) + " + 
-                str(trans_mat[1][2]) + "  : (s'=2) + " + 
-                str(trans_mat[1][3]) + "  : (s'=3) + " + 
-                str(trans_mat[1][4]) + "  : (s'=4) + " + 
-                str(trans_mat[1][5]) + "  : (s'=5) + " + 
-                str(trans_mat[1][6]) + "  : (s'=6) + " + 
-                str(trans_mat[1][7]) + "  : (s'=7) + " + 
-                str(trans_mat[1][8]) + "  : (s'=8);\n\t" +
-                "[] s=2 -> " + str(trans_mat[2][0]) + " : (s'=0) + " + 
-                str(trans_mat[2][1]) + "  : (s'=1) + " + 
-                str(trans_mat[2][2]) + "  : (s'=2) + " + 
-                str(trans_mat[2][3]) + "  : (s'=3) + " + 
-                str(trans_mat[2][4]) + "  : (s'=4) + " + 
-                str(trans_mat[2][5]) + "  : (s'=5) + " + 
-                str(trans_mat[2][6]) + "  : (s'=6) + " + 
-                str(trans_mat[2][7]) + "  : (s'=7) + " + 
-                str(trans_mat[2][8]) + "  : (s'=8);\n\t" +
-                "[] s=3 -> " + str(trans_mat[3][0]) + " : (s'=0) + " + 
-                str(trans_mat[3][1]) + "  : (s'=1) + " + 
-                str(trans_mat[3][2]) + "  : (s'=2) + " + 
-                str(trans_mat[3][3]) + "  : (s'=3) + " + 
-                str(trans_mat[3][4]) + "  : (s'=4) + " + 
-                str(trans_mat[3][5]) + "  : (s'=5) + " + 
-                str(trans_mat[3][6]) + "  : (s'=6) + " + 
-                str(trans_mat[3][7]) + "  : (s'=7) + " + 
-                str(trans_mat[3][8]) + "  : (s'=8);\n\t" +
-                "[] s=4 -> " + str(trans_mat[4][0]) + " : (s'=0) + " + 
-                str(trans_mat[4][1]) + "  : (s'=1) + " + 
-                str(trans_mat[4][2]) + "  : (s'=2) + " + 
-                str(trans_mat[4][3]) + "  : (s'=3) + " + 
-                str(trans_mat[4][4]) + "  : (s'=4) + " + 
-                str(trans_mat[4][5]) + "  : (s'=5) + " + 
-                str(trans_mat[4][6]) + "  : (s'=6) + " + 
-                str(trans_mat[4][7]) + "  : (s'=7) + " + 
-                str(trans_mat[4][8]) + "  : (s'=8);\n\t" +
-                "[] s=5 -> " + str(trans_mat[5][0]) + "  : (s'=0) + " + 
-                str(trans_mat[5][1]) + "  : (s'=1) + " + 
-                str(trans_mat[5][2]) + "  : (s'=2) + " + 
-                str(trans_mat[5][3]) + "  : (s'=3) + " + 
-                str(trans_mat[5][4]) + "  : (s'=4) + " + 
-                str(trans_mat[5][5]) + "  : (s'=5) + " + 
-                str(trans_mat[5][6]) + "  : (s'=6) + " + 
-                str(trans_mat[5][7]) + "  : (s'=7) + " + 
-                str(trans_mat[5][8]) + "  : (s'=8);\n\t" +
-                "[] s=6 -> " + str(trans_mat[6][0]) + " : (s'=0) + " + 
-                str(trans_mat[6][1]) + "  : (s'=1) + " + 
-                str(trans_mat[6][2]) + "  : (s'=2) + " + 
-                str(trans_mat[6][3]) + "  : (s'=3) + " + 
-                str(trans_mat[6][4]) + "  : (s'=4) + " + 
-                str(trans_mat[6][5]) + "  : (s'=5) + " + 
-                str(trans_mat[6][6]) + "  : (s'=6) + " + 
-                str(trans_mat[6][7]) + "  : (s'=7) + " + 
-                str(trans_mat[6][8]) + "  : (s'=8);\n\n" +
-                "\t// absorbing states\n\t[] s=7 -> (s'=7);\n" +
-                "\t[] s=8 -> (s'=8);\n\nendmodule")
+prismFile = open("../prism/markovdecisionprocess.pm", "w");
+prismFile.write("mdp\n\n" +
+                "module passes_and_shots\n\n\t" +
+                "// states: 0-6 = zones on the pitch; 7 = possession lost;" +
+                " 8 = goal scored\n\t" +
+                "s : [0..8];\n\t" +
+                "// player actions from zone 0 (s=0)\n\t" +
+                "[pass_0_0]\t      s=0 ->\n\t" +
+                str(succ_mat[0][0]) + " : (s'=0) + (1 - " + 
+                str(succ_mat[0][0]) + ") : (s'=7);\n\t" +
+                "[pass_0_1]\t      s=0 ->\n\t" +
+                str(succ_mat[0][1]) + " : (s'=1) + (1 - " + 
+                str(succ_mat[0][1]) + ") : (s'=7);\n\t" +
+                "[pass_0_2]\t      s=0 ->\n\t" +
+                str(succ_mat[0][2]) + " : (s'=2) + (1 - " + 
+                str(succ_mat[0][2]) + ") : (s'=7);\n\t" +
+                "[pass_0_3]\t      s=0 ->\n\t" +
+                str(succ_mat[0][3]) + " : (s'=3) + (1 - " + 
+                str(succ_mat[0][3]) + ") : (s'=7);\n\t" +
+                "[pass_0_4]\t      s=0 ->\n\t" +
+                str(succ_mat[0][4]) + " : (s'=4) + (1 - " + 
+                str(succ_mat[0][4]) + ") : (s'=7);\n\t" +
+                "[pass_0_5]\t      s=0 ->\n\t" +
+                str(succ_mat[0][5]) + " : (s'=5) + (1 - " + 
+                str(succ_mat[0][5]) + ") : (s'=7);\n\t" +
+                "[pass_0_6]\t      s=0 ->\n\t" +
+                str(succ_mat[0][6]) + " : (s'=6) + (1 - " + 
+                str(succ_mat[0][6]) + ") : (s'=7);\n\t" +
+                "[shoot_0]\t       s=0 ->\n\t" +
+                str(succ_mat[0][7]) + " : (s'=8) + (1 - " + 
+                str(succ_mat[0][7]) + ") : (s'=7);\n\n\t" +
+
+                "// player actions from zone 1 (s=1)\n\t" +
+                "[pass_1_0]\t      s=1 ->\n\t" +
+                str(succ_mat[1][0]) + " : (s'=0) + (1 - " + 
+                str(succ_mat[1][0]) + ") : (s'=7);\n\t" +
+                "[pass_1_1]\t      s=1 ->\n\t" +
+                str(succ_mat[1][1]) + " : (s'=1) + (1 - " + 
+                str(succ_mat[1][1]) + ") : (s'=7);\n\t" +
+                "[pass_1_2]\t      s=1 ->\n\t" +
+                str(succ_mat[1][2]) + " : (s'=2) + (1 - " + 
+                str(succ_mat[1][2]) + ") : (s'=7);\n\t" +
+                "[pass_1_3]\t      s=1 ->\n\t" +
+                str(succ_mat[1][3]) + " : (s'=3) + (1 - " + 
+                tr(succ_mat[1][3]) + ") : (s'=7);\n\t" +
+                "[pass_1_4]\t      s=1 ->\n\t" +
+                str(succ_mat[1][4]) + " : (s'=4) + (1 - " + 
+                str(succ_mat[1][4]) + ") : (s'=7);\n\t" +
+                "[pass_1_5]\t      s=1 ->\n\t" +
+                str(succ_mat[1][5]) + " : (s'=5) + (1 - " + 
+                str(succ_mat[1][5]) + ") : (s'=7);\n\t" +
+                "[pass_1_6]\t      s=1 ->\n\t" +
+                str(succ_mat[1][6]) + " : (s'=6) + (1 - " + 
+                str(succ_mat[1][6]) + ") : (s'=7);\n\t" +
+                "[shoot_1]\t       s=1 ->\n\t" +
+                str(succ_mat[1][7]) + " : (s'=8) + (1 - " 
+                + str(succ_mat[1][7]) + ") : (s'=7);\n\n\t" +
+
+                "// player actions from zone 2 (s=2)\n\t" +
+                "[pass_2_0]\t      s=2 ->\n\t" +
+                str(succ_mat[2][0]) + " : (s'=0) + (1 - " + 
+                str(succ_mat[2][0]) + ") : (s'=7);\n\t" +
+                "[pass_2_1]\t      s=2 ->\n\t" +
+                str(succ_mat[2][1]) + " : (s'=1) + (1 - " + 
+                str(succ_mat[2][1]) + ") : (s'=7);\n\t" +
+                "[pass_2_2]\t      s=2 ->\n\t" +
+                str(succ_mat[2][2]) + " : (s'=2) + (1 - " + 
+                str(succ_mat[2][2]) + ") : (s'=7);\n\t" +
+                "[pass_2_3]\t      s=2 ->\n\t" + 
+                str(succ_mat[2][3]) + " : (s'=3) + (1 - " + 
+                str(succ_mat[2][3]) + ") : (s'=7);\n\t" +
+                "[pass_2_4]\t      s=2 ->\n\t" +
+                str(succ_mat[2][4]) + " : (s'=4) + (1 - " + 
+                str(succ_mat[2][4]) + ") : (s'=7);\n\t" +
+                "[pass_2_5]\t      s=2 ->\n\t" +
+                str(succ_mat[2][5]) + " : (s'=5) + (1 - " + 
+                str(succ_mat[2][5]) + ") : (s'=7);\n\t" +
+                "[pass_2_6]\t      s=2 ->\n\t" +
+                str(succ_mat[2][6]) + " : (s'=6) + (1 - " + 
+                str(succ_mat[2][6]) + ") : (s'=7);\n\t" +
+                "[shoot_2]\t       s=2 ->\n\t" +
+                str(succ_mat[2][7]) + " : (s'=8) + (1 - " + 
+                str(succ_mat[2][7]) + ") : (s'=7);\n\n\t" +
+
+                "// player actions from zone 3 (s=3)\n\t" +
+                "[pass_3_0]\t      s=3 ->\n\t" +
+                str(succ_mat[3][0]) + " : (s'=0) + (1 - " + 
+                str(succ_mat[3][0]) + ") : (s'=7);\n\t" +
+                "[pass_3_1]\t      s=3 ->\n\t" +
+                str(succ_mat[3][1]) + " : (s'=1) + (1 - " + 
+                str(succ_mat[3][1]) + ") : (s'=7);\n\t" +
+                "[pass_3_2]\t      s=3 ->\n\t" +
+                str(succ_mat[3][2]) + " : (s'=2) + (1 - " + 
+                str(succ_mat[3][2]) + ") : (s'=7);\n\t" +
+                "[pass_3_3]\t      s=3 ->\n\t" +
+                str(succ_mat[3][3]) + " : (s'=3) + (1 - " + 
+                str(succ_mat[3][3]) + ") : (s'=7);\n\t" + 
+                "[pass_3_4]\t      s=3 ->\n\t" +
+                str(succ_mat[3][4]) + " : (s'=4) + (1 - " + 
+                str(succ_mat[3][4]) + ") : (s'=7);\n\t" +
+                "[pass_3_5]\t      s=3 ->\n\t" +
+                str(succ_mat[3][5]) + " : (s'=5) + (1 - " + 
+                str(succ_mat[3][5]) + ") : (s'=7);\n\t" +
+                "[pass_3_6]\t      s=3 ->\n\t" +
+                str(succ_mat[3][6]) + " : (s'=6) + (1 - " + 
+                str(succ_mat[3][6]) + ") : (s'=7);\n\t" +
+                "[shoot_3]\t       s=3 ->\n\t" +
+                str(succ_mat[3][7]) + " : (s'=8) + (1 - " + 
+                str(succ_mat[3][7]) + ") : (s'=7);\n\n\t" +
+
+                "// player actions from zone 4 (s=4)\n\t" +
+                "[pass_4_0]\t      s=4 ->\n\t" +
+                str(succ_mat[4][0]) + " : (s'=0) + (1 - " + 
+                str(succ_mat[4][0]) + ") : (s'=7);\n\t" +
+                "[pass_4_1]\t      s=4 ->\n\t" +
+                str(succ_mat[4][1]) + " : (s'=1) + (1 - " + 
+                str(succ_mat[4][1]) + ") : (s'=7);\n\t" +
+                "[pass_4_2]\t      s=4 ->\n\t" +
+                str(succ_mat[4][2]) + " : (s'=2) + (1 - " + 
+                str(succ_mat[4][2]) + ") : (s'=7);\n\t" +
+                "[pass_4_3]\t      s=4 ->\n\t" +
+                str(succ_mat[4][3]) + " : (s'=3) + (1 - " + 
+                str(succ_mat[4][3]) + ") : (s'=7);\n\t" +
+                "[pass_4_4]\t      s=4 ->\n\t" +
+                str(succ_mat[4][4]) + " : (s'=4) + (1 - " + 
+                str(succ_mat[4][4]) + ") : (s'=7);\n\t" +
+                "[pass_4_5]\t      s=4 ->\n\t" +
+                str(succ_mat[4][5]) + " : (s'=5) + (1 - " + 
+                str(succ_mat[4][5]) + ") : (s'=7);\n\t" +
+                "[pass_4_6]\t      s=4 ->\n\t" +
+                str(succ_mat[4][6]) + " : (s'=6) + (1 - " + 
+                str(succ_mat[4][6]) + ") : (s'=7);\n\t" +
+                "[shoot_4]\t       s=4 ->\n\t" +
+                str(succ_mat[4][7]) + " : (s'=8) + (1 - " + 
+                str(succ_mat[4][7]) + ") : (s'=7);\n\n\t" +
+
+                "// player actions from zone 5 (s=5)\n\t" +
+                "[pass_5_0]\t      s=5 ->\n\t" +
+                str(succ_mat[5][0]) + " : (s'=0) + (1 - " + 
+                str(succ_mat[5][0]) + ") : (s'=7);\n\t" +
+                "[pass_5_1]\t      s=5 ->\n\t" +
+                str(succ_mat[5][1]) + " : (s'=1) + (1 - " + 
+                str(succ_mat[5][1]) + ") : (s'=7);\n\t" +
+                "[pass_5_2]\t      s=5 ->\n\t" +
+                str(succ_mat[5][2]) + " : (s'=2) + (1 - " + 
+                str(succ_mat[5][2]) + ") : (s'=7);\n\t" +
+                "[pass_5_3]\t      s=5 ->\n\t" +
+                str(succ_mat[5][3]) + " : (s'=3) + (1 - " + 
+                str(succ_mat[5][3]) + ") : (s'=7);\n\t" +
+                "[pass_5_4]\t      s=5 ->\n\t" + 
+                str(succ_mat[5][4]) + " : (s'=4) + (1 - " + 
+                str(succ_mat[5][4]) + ") : (s'=7);\n\t" +
+                "[pass_5_5]\t      s=5 ->\n\t" +
+                str(succ_mat[5][5]) + " : (s'=5) + (1 - " + 
+                str(succ_mat[5][5]) + ") : (s'=7);\n\t" +
+                "[pass_5_6]\t      s=5 ->\n\t" +
+                str(succ_mat[5][6]) + " : (s'=6) + (1 - " + 
+                str(succ_mat[5][6]) + ") : (s'=7);\n\t" +
+                "[shoot_5]\t       s=5 ->\n\t" +
+                str(succ_mat[5][7]) + " : (s'=8) + (1 - " + 
+                str(succ_mat[5][7]) + ") : (s'=7);\n\n\t" +
+
+                "// player actions from zone 6 (s=6)\n\t" +
+                "[pass_6_0]\t      s=6 ->\n\t" +
+                str(succ_mat[6][0]) + " : (s'=0) + (1 - " + 
+                str(succ_mat[6][0]) + ") : (s'=7);\n\t" +
+                "[pass_6_1]\t      s=6 ->\n\t" +
+                str(succ_mat[6][1]) + " : (s'=1) + (1 - " + 
+                str(succ_mat[6][1]) + ") : (s'=7);\n\t" +
+                "[pass_6_2]\t      s=6 ->\n\t" +
+                str(succ_mat[6][2]) + " : (s'=2) + (1 - " + 
+                str(succ_mat[6][2]) + ") : (s'=7);\n\t" +
+                "[pass_6_3]\t      s=6 ->\n\t" +
+                str(succ_mat[6][3]) + " : (s'=3) + (1 - " + 
+                str(succ_mat[6][3]) + ") : (s'=7);\n\t" +
+                "[pass_6_4]\t      s=6 ->\n\t" +
+                str(succ_mat[6][4]) + " : (s'=4) + (1 - " + 
+                str(succ_mat[6][4]) + ") : (s'=7);\n\t" +
+                "[pass_6_5]\t      s=6 ->\n\t" +
+                str(succ_mat[6][5]) + " : (s'=5) + (1 - " + 
+                str(succ_mat[6][5]) + ") : (s'=7);\n\t" +
+                "[pass_6_6]\t      s=6 ->\n\t" +
+                str(succ_mat[6][6]) + " : (s'=6) + (1 - " + 
+                str(succ_mat[6][6]) + ") : (s'=7);\n\t" +
+                "[shoot_6]\t       s=6 ->\n\t" +
+                str(succ_mat[6][7]) + " : (s'=8) + (1 - " + 
+                str(succ_mat[6][7]) + ") : (s'=7);\n\n\t" +
+
+                "// absorbing states\n\t" +
+                "[] s=7 -> (s'=7);\n\t" +
+                "[] s=8 -> (s'=8);\n\n" +
+
+                "endmodule\n\n" +
+
+                "label \"possession_lost\" = (s=7);\n" +
+                "label \"goal\" = (s=8);")
 
 prismFile.close()

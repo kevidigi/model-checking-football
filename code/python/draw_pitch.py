@@ -4,7 +4,6 @@
 # Script to draw a matplotlib football pitch diagram
 # Orignal code by Peter McKeever 
 # (http://www.petermckeever.com, 2020)
-# Thanks Peter!
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Arc

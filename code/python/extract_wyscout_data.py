@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Script for extraction of transition probabilities (state to state) 
-# from Wyscout football data (json). Transitions only occur via passes
-# and shots for the purposes of my model.
+# Script for calculating transition probabilities between zones of a football
+# pitch in the opponent's half. For use with Wyscout data in json format.
+# Probabilities used to generate a Markov Chain in the PRISM modelling
+# language which is written to a file. The model only considers passes and
+# shots.
 
 # @author: Kevin Lynch <kevin.lynch@glasgow.ac.uk>
 
@@ -97,7 +99,6 @@ def calculate_transition_matrix(filename):
                         for k in range (0,7):
                             if toZoneX(k, aPass) and toZoneY(k, aPass):
                                 trans_mat[j][k] += 1
-                                succ_mat[j][k] += 1
 
 # calculate probability of s -> s' 
 def convert_to_probabilities():
@@ -108,6 +109,7 @@ def convert_to_probabilities():
              
 # quick check that probabilities sum to 1
 def check_sum_P():
+    print("Outbound Probabilities sum to 1?")
     for i in range(0,7):
         print("S" + str(i) + ": " + str((sum(trans_mat[i]) == 1)) + " (" 
               + str((sum(trans_mat[i]))) + ")")
@@ -125,26 +127,6 @@ trans_mat = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-succ_mat = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
-]
-
-# I need a matrix of... for each state, for each decision in that state
-# (pass to zone 0-6 or shoot) and chance of succ/fail
-# e.g. zone 0 -> pass to zone 3 -> succ? / poslos?
-# e.g. zone 4 -> shoot -> succ? / poslos? (can use xG here)
-# can synthesise own xG model for dissertation patter
-
-# for failed passes: get angle (to x axis?) of pass
-# see which n zones would be on straight path
-# 1/n failure added to each zone
-
 start = time.time()
 
 calculate_transition_matrix("../../data/events_Italy.json")
@@ -157,15 +139,14 @@ convert_to_probabilities()
 
 # fix for floating point error - all Ps must add to 1
 trans_mat[3][0] += 0.0000000000000001
-succ_mat /= trans_mat
 
 # double check!
 check_sum_P()
 
 print()
+print("Transition Probability Matrix:")
 print(pd.DataFrame(trans_mat))
 print()
-print(pd.DataFrame(succ_mat))
 pd.DataFrame(trans_mat).to_csv("./probabilities.txt")   
 
 end = time.time()
@@ -174,7 +155,7 @@ print("time elapsed: " + str(round(((end - start) / 60), 2))
 
 prismFile = open("../prism/markovchain.pm", "w");
 prismFile.write("dtmc\n\nmodule possession\n\n\t" +
-                "// state: i.e. area of the pitch where ball is" + 
+                "// state: i.e. area of the pitch where ball is " + 
                 "in possession\n" + 
                 "\ts : [0..8];\n" +
                 "\t\t// 0 - 6: areas of the pitch\n" +
