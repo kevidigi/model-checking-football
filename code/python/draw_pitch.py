@@ -200,19 +200,19 @@ def draw_pitch(x_min=0, x_max=105,
     
 # example
 
-# background = "#305d40"
+background = "#305d40"
 
-# fig, ax = plt.subplots(figsize=(11, 7))
-# fig.set_facecolor(background)
+fig, ax = plt.subplots(figsize=(11, 7))
+fig.set_facecolor(background)
 
-# draw_pitch(orientation="vertical",
-#             aspect="half",
-#             pitch_color=background,
-#             line_color="lightgrey",
-#             ax=ax)
+draw_pitch(orientation="vertical",
+            aspect="half",
+            pitch_color=background,
+            line_color="lightgrey",
+            ax=ax)
 
-# plt.tight_layout()
-# plt.show()
+plt.tight_layout()
+plt.show()
 
 
 
