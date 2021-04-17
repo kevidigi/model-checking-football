@@ -228,4 +228,5 @@ plt.xlim((0,66))
 plt.ylim((-3,35))
 plt.gca().set_aspect('equal', adjustable='box')
 plt.show()
-fig.savefig('Output/goalprobfor_' + model  + '.pdf', dpi=None, bbox_inches="tight")   
+
+pd.DataFrame(pgoal_2d).to_csv("./modelledxG.txt")

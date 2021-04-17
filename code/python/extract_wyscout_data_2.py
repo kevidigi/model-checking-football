@@ -385,7 +385,14 @@ prismFile.write("mdp\n\n" +
                 "[] s=8 -> (s'=8);\n\n" +
 
                 "endmodule\n\n" +
-
+                
+                "label \"ball_in_zone_0\" = (s=0);\n" +
+                "label \"ball_in_zone_1\" = (s=1);\n" +
+                "label \"ball_in_zone_2\" = (s=2);\n" +
+                "label \"ball_in_zone_3\" = (s=3);\n" +
+                "label \"ball_in_zone_4\" = (s=4);\n" +
+                "label \"ball_in_zone_5\" = (s=5);\n" +
+                "label \"ball_in_zone_6\" = (s=6);\n" +
                 "label \"possession_lost\" = (s=7);\n" +
                 "label \"goal\" = (s=8);")
 
