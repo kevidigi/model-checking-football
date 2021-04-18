@@ -138,21 +138,21 @@ def draw_pitch(x_min=0, x_max=105,
     ax.plot([45.3, 45.3], [105, 70],
             color = "skyblue", lw = line_thickness * 0.75)
     
-    # label zones
-    plt.text(34, 62, '0', horizontalalignment='center', fontsize = 24, 
-              color = 'coral')
-    plt.text(12, 78, '1', horizontalalignment='center', fontsize = 24, 
-              color = 'coral')
-    plt.text(34, 78, '2', horizontalalignment='center', fontsize = 24, 
-              color = 'coral')
-    plt.text(56, 78, '3', horizontalalignment='center', fontsize = 24, 
-              color = 'coral')
-    plt.text(12, 96, '4', horizontalalignment='center', fontsize = 24, 
-              color = 'coral')
-    plt.text(34, 96, '5', horizontalalignment='center', fontsize = 24, 
-              color = 'coral')
-    plt.text(56, 96, '6', horizontalalignment='center', fontsize = 24, 
-              color = 'coral')
+    # # label zones
+    # plt.text(34, 62, '0', horizontalalignment='center', fontsize = 24, 
+    #           color = 'coral')
+    # plt.text(12, 78, '1', horizontalalignment='center', fontsize = 24, 
+    #           color = 'coral')
+    # plt.text(34, 78, '2', horizontalalignment='center', fontsize = 24, 
+    #           color = 'coral')
+    # plt.text(56, 78, '3', horizontalalignment='center', fontsize = 24, 
+    #           color = 'coral')
+    # plt.text(12, 96, '4', horizontalalignment='center', fontsize = 24, 
+    #           color = 'coral')
+    # plt.text(34, 96, '5', horizontalalignment='center', fontsize = 24, 
+    #           color = 'coral')
+    # plt.text(56, 96, '6', horizontalalignment='center', fontsize = 24, 
+    #           color = 'coral')
 
     for point in points:
         ax.scatter(point[first], point[second],
