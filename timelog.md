@@ -71,7 +71,7 @@
 ### Tuesday 17th November
 
 * *0.5 hours* meeting with project supervisor
-* *3 houra* Studying traditional football data analysis (FC Python)
+* *3 hours* Studying traditional football data analysis (FC Python)
 
 ### Wednesday 18th November
 
@@ -88,9 +88,13 @@
 
 * *3.5 hours* studying Probabilistic Model Checking - DTMCs, probability transition matrices
 
+### Tuesday 24th November
+
+* *0.5 hours* Meeting with Alice Miller and William Kavanagh
+
 ## Week 10
 
-* No significant progress
+* *0.5 hours* Meeting with supervisors
 
 ## Week 11
 
@@ -106,4 +110,84 @@
 
 ## - - - Winter Break - - - 
 
+## Week 15(?)
 
+* *20 hours* across week - reviewing work so far and planning next stages. Began serious reading for background material/lit review
+
+### Friday 22nd January
+* *0.5 hours* meeting with Alice and William
+
+## Week 16
+
+* *10 hours* across the week defining model states and writing python code to categorise events
+* *5 hours* began writing! 
+
+
+### Friday 29th January
+
+* *0.5 hours* meeting with William
+
+## Week 16
+
+* *20 hours* first working models built. time spent playing with PRISM to understand property verification.
+
+* No meeting this week
+
+## Week 17 
+
+* *10 hours* refinement of models, 
+
+### Friday 12th February
+
+* *0.5 hours* meeting with Alice
+
+## Week 18 - 'Reading' Week
+
+* *40 hours* approx across entire week working on xG modelling
+
+## Week 19
+
+### Friday 26th February
+
+* *0.5 hours* meeting with William and Alice
+
+## Week 20
+
+### Friday 5th March
+
+* *0.5 hours* meeting with Alice and William
+
+# Week 21
+
+### Friday 12th March
+
+* *0.5 hours* meeting with supervisors
+
+## Week 22
+
+* *1 hour* discussion with William re: adversaries
+* *12 hours* rewrote models and investigated adversarial transitions
+
+## Week 23
+
+* *8 hours* across the week building MDPs with Python and PRISM
+
+### Friday 26th March
+
+* *0.5 hours*  meeting with Alice and William
+
+## Week 24
+
+* No significant progress - finishing other assignments
+
+## Week 25
+
+* *10 hours* typing up notes on Data and Methodology
+
+### Friday 9th April
+
+* Submitted draft of first two chapters to Alice
+
+## Week 26
+
+* *25 hours* across the week redrafting, finished Results and Conclusion. Added visualisatons of results.
