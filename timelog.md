@@ -87,3 +87,23 @@
 ### Monday 23rd November
 
 * *3.5 hours* studying Probabilistic Model Checking - DTMCs, probability transition matrices
+
+## Week 10
+
+* No significant progress
+
+## Week 11
+
+* *15 hours* across the week getting my head around the Wyscout data obtained.
+
+## Week 12
+
+* *30 hours* across the week working on python code to build xG model and begin extracting probabilities from Wyscout data
+
+### Friday 18th December
+* *0.5 hours* writing status report for submission
+
+
+## - - - Winter Break - - - 
+
+
