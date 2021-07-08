@@ -5,7 +5,7 @@ Senior Honours Dissertation Project | BSc (Hons) Software Engineering, Universit
 ## Abstract
 
 
-In his 2008 retrospective of the sport, Inverting the Pyramid [1], Jonathan Wilson observed that football practitioners, particularly in the UK, have traditionally been "unwilling to grapple with the abstract." In the past decade, however, abstractions of football have become invaluable. Teams increasingly rely on computer-aided analysis of match data to inform decisions, both on and off the pitch. This project investigates the feasibility of using model checking as a technique to gain insights from football data and identify potential strategies.
+In his 2008 retrospective of the sport, Inverting the Pyramid, Jonathan Wilson observed that football practitioners, particularly in the UK, have traditionally been "unwilling to grapple with the abstract." In the past decade, however, abstractions of football have become invaluable. Teams increasingly rely on computer-aided analysis of match data to inform decisions, both on and off the pitch. This project investigates the feasibility of using model checking as a technique to gain insights from football data and identify potential strategies.
 We show that event-level match data can be used in conjunction with modelling techniques and the PRISM probabilistic model checker to synthesise plausible football strategies, and attempt to lay a foundation for potential future work on this topic.
 
 ---
