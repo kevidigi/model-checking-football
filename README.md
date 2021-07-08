@@ -1,6 +1,6 @@
 # Model Checking for Strategy Generation in Football
 
-Senior Honours Dissertation Project | BSc (Hons) Software Engineering, University of Glasgow
+Senior Honours Dissertation Project | BSc (Hons) Software Engineering | University of Glasgow
 
 ## Abstract
 
